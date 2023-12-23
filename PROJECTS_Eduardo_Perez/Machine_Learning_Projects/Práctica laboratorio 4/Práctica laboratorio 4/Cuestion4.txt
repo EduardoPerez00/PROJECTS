@@ -1,0 +1,106 @@
+4.2
+datos=readmatrix('cuestion44_data.xlsx');
+x=datos(:,1:2);
+y=datos(:,3);
+y=y+1;
+m=length(y);
+
+histogram(x(:,1),10);
+title('Histograma de la humedad relativa');
+xlabel('Humedad relativa(%)');
+
+histogram(x(:,2),10);
+title('Histograma de la prsesión atmosférica');
+xlabel('Presión atmosférica (hPa)');
+
+histogram(y(:),10);
+title('Fallos');
+
+plot(x(:,1),x(:,2),'o');
+title('Diagramas de dispersión variables de entrada');
+xlabel('Humedad relativa(%)');
+ylabel('Presión atmosférica (hPa)');
+
+4.3
+
+gscatter(x(:,1),x(:,2),y);
+title('Visualización de las clases')
+legend('No fallo','Fallo');
+xlabel('Humedad relativa (%)');
+ylabel('Presión atmosférica (hPa)');
+
+4.4
+
+P=0.7; % 70 % del conjunto de datos para entrenamiento, luego ejecutar con el 
+15% para validación y el 10% para test
+idx=randperm(m);
+xtrain=x(idx(1:round(P*m)),:);
+ytrain=y(idx(1:round(P*m)),:);
+xtest=x(idx(round(P*m)+1:end),:);
+ytest=y(idx(round(P*m)+1:end),:);
+theta=mnrfit(xtrain,ytrain)
+
+4.5
+
+%Entrenamiento
+mtrain=length(ytrain);
+xtrain2=[ones(mtrain,1) xtrain];
+ztrain=xtrain2*theta; % z=theta0*1 + theta1*x1 + theta2*x2
+htrain=1.0./(1.0+exp(-ztrain));
+histogram(htrain,10);
+
+%test
+mtest=length(ytest);
+xtest2=[ones(mtest,1) xtest];
+ztest=xtest2*theta; % z=theta0*1 + theta1*x1 + theta2*x2
+htest=1.0./(1.0+exp(-ztest));
+histogram(htest,10);
+
+4.5
+
+scatter(xtest(:,1),xtest(:,2),50,htest);
+cb=colorbar();
+
+4.6
+
+gscatter(x(:,1),x(:,2),y);
+legend('No fallo','Fallo');
+xlabel('Humedad erlativa (%)');
+ylabel('Presión atmosférica (hPa)');
+hold on;
+plot(x(:,1),-(theta(1)*1 + theta(2)*x(:,1))/theta(3));
+legend('No fallo','fallo','limite de desición');
+hold off;
+
+4.7
+
+%Entrenamiento
+ytrainpred=htrain<0.5; % para asegurar más se podía comparar con 0,7 pero no se 
+va a hacer
+ytrainpred=ytrainpred+1;
+gscatter(xtrain(:,1),xtrain(:,2),ytrainpred);
+
+exactitud_training=mean(double(ytrainpred==ytrain))*100
+
+%test
+ytestpred=htest<0.5; % para asegurar más se podía comparar con 0,7 pero no se 
+va a hacer
+ytestpred=ytestpred+1;
+gscatter(xtest(:,1),xtest(:,2),ytestpred);
+
+exactitud_test=mean(double(ytestpred==ytest))*100
+
+verdad_fallo=sum(double(ytest==2))
+
+predice_fallo=sum(double(ytestpred==2))
+
+verdadero_positivo=sum(double(ytest==2).*double(ytestpred==2))
+
+precision=verdadero_positivo/predice_fallo
+
+recuperacion=verdadero_positivo/verdad_fallo
+
+4.8
+
+f1=2*precision*recuperacion/(precision+recuperacion)
+

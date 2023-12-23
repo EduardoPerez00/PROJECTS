@@ -1,0 +1,28 @@
+6.1
+
+datos=readmatrix('cuestion46_data.xlsx');
+X=datos(:,1:4);
+y=datos(:,5);
+m=length(y);
+
+P=0.7; % 70 % del conjunto de datos para entrenamiento
+idx=randperm(m);
+Xtrain=X(idx(1:round(P*m)),:);
+ytrain=y(idx(1:round(P*m)),:);
+Xtest=X(idx(round(P*m)+1:end),:);
+ytest=y(idx(round(P*m)+1:end),:);
+
+theta=mnrfit(Xtrain,ytrain);
+mtest=length(ytest);
+Xtest2=[ones(mtest,1) Xtest];
+predecir(:,1)=exp(Xtest2*theta(:,1))./(1+exp(Xtest2*theta(:,1)+exp(Xtest2*theta(:,2))));
+predecir(:,2)=exp(Xtest2*theta(:,2))./(1+exp(Xtest2*theta(:,2)+exp(Xtest2*theta(:,2))));
+predecir(:,3)=1./(1+exp(Xtest2*theta(:,1)+exp(Xtest2*theta(:,2))));
+[Valor,ytestpred]=max(predecir,[],2);
+
+precision_test=mean(double(ytestpred==ytest))*100
+
+Xtool=[Xtrain,ytrain];
+yfit = trainedModel.predictFcn(Xtest)
+
+precision_test=mean(double(yfit==ytest))*100

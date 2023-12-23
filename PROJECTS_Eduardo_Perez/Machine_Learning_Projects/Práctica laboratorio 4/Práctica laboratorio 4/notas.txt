@@ -1,0 +1,21 @@
+>> datos=load('cuestion41_data.txt');
+>> x=datos(:,1);
+>> y=datos(:,2);
+>> plot(x,y,'ro','markersize',4,'markerfacecolor','b');
+>> 
+>> title('Gráfico de dispersión')
+>> ylabel('Beneficios de ventas x 10000 €');
+>> xlabel('Dinero de tarjetas electrónicas vendidas x 10.000');
+>> 
+>> p=polyfit(x,y,1)
+
+p =
+
+    1.1930   -3.8958
+
+>> z=polyval(p,x); % z = theta0 + theta1*x
+>> hold on
+>> plot(x,z,'r')
+>> legend('Datos','Recta de regresión')
+>> hold off
+>> 

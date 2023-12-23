@@ -1,0 +1,43 @@
+2.1
+tbl=readtable('cuestion42_data.txt');
+datos=table2array(tbl);
+x1=datos(:,1);
+x2=datos(:,2);
+y=datos(:,3);
+scatter3(x1,x2,y,'filled')
+title('Gráfico de dispersión');
+xlabel('Frecuencias (KHZ)');
+ylabel('Nº de núcleos');
+zlabel('Intrucciones/s');
+
+2.2
+
+mdl=fitlm(tbl)
+
+X=datos(:, 1:2);
+n=length(y);
+X1=[ones(n,1) X];
+theta=pinv(X1' *X1)*X1' *y
+
+X=[ones(size(x1)) x1 x2];
+b=regress(y,X);
+
+scatter3(x1,x2,y,'filled')
+title('Gráfico de dispersión');
+xlabel('Frecuencias (KHZ)');
+ylabel('Número de núcleos');
+zlabel('Instrucciones/s');
+hold on
+[X1FIT,X2FIT]=meshgrid(x1,x2);
+coeficientes=table2array(mdl.Coefficients);
+YFIT=coeficientes(1,1)+coeficientes(2,1)*X1FIT+coeficientes(3,1)*X2FIT;
+mesh(X1FIT,X2FIT,YFIT);
+hold off
+
+2.3
+
+I=theta(1)+1650*theta(2)+3*theta(3)
+
+
+
+

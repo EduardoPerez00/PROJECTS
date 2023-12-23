@@ -1,0 +1,218 @@
+3.1
+
+load("cuestion43_data.mat");
+plot(xtrain,ytrain,"o",xval,yval,"s",xtest,ytest,'^');
+title('Visualización de los datos')
+legend("train",'val','test','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+3.2
+
+polymodel1=polyfitn(xtrain,ytrain,1)
+
+x=(-60:0.01:60);
+ypred1 = polyvaln(polymodel1,x);
+plot(xtrain,ytrain,'ro',x,ypred1,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 1');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+3.3
+
+polymodel2=polyfitn(xtrain,ytrain,2)
+
+x=(-60:0.01:60);
+ypred2 = polyvaln(polymodel2,x);
+plot(xtrain,ytrain,'ro',x,ypred2,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 2');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+
+polymodel3=polyfitn(xtrain,ytrain,3)
+
+x=(-60:0.01:60);
+ypred3 = polyvaln(polymodel3,x);
+plot(xtrain,ytrain,'ro',x,ypred3,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 3');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel4=polyfitn(xtrain,ytrain,4)
+
+x=(-60:0.01:60);
+ypred4 = polyvaln(polymodel4,x);
+plot(xtrain,ytrain,'ro',x,ypred4,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 4');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel5=polyfitn(xtrain,ytrain,5)
+
+x=(-60:0.01:60);
+ypred5 = polyvaln(polymodel5,x);
+plot(xtrain,ytrain,'ro',x,ypred5,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 5');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel6=polyfitn(xtrain,ytrain,6)
+
+x=(-60:0.01:60);
+ypred6 = polyvaln(polymodel6,x);
+plot(xtrain,ytrain,'ro',x,ypred6,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 6');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel7=polyfitn(xtrain,ytrain,7)
+
+x=(-60:0.01:60);
+ypred7 = polyvaln(polymodel7,x);
+plot(xtrain,ytrain,'ro',x,ypred7,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 7');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel8=polyfitn(xtrain,ytrain,8)
+
+x=(-60:0.01:60);
+ypred8 = polyvaln(polymodel8,x);
+plot(xtrain,ytrain,'ro',x,ypred8,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 8');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel9=polyfitn(xtrain,ytrain,9)
+
+x=(-60:0.01:60);
+ypred9 = polyvaln(polymodel9,x);
+plot(xtrain,ytrain,'ro',x,ypred9,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 9');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+polymodel10=polyfitn(xtrain,ytrain,10)
+
+x=(-60:0.01:60);
+ypred10 = polyvaln(polymodel10,x);
+plot(xtrain,ytrain,'ro',x,ypred10,'b-')
+title('Recta regresión lineal, datos de entrenamiento grado 10');
+legend("train",'Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+
+3.5
+
+plot(xval,yval,'rs',x,polyvaln(polymodel1,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel1,xval);
+R2(1)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel2,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel2,xval);
+R2(2)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel3,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel3,xval);
+R2(3)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel4,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel4,xval);
+R2(4)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel5,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel5,xval);
+R2(5)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel6,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel6,xval);
+R2(6)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel7,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel7,xval);
+R2(7)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel8,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel8,xval);
+R2(8)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel9,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel9,xval);
+R2(9)=calculateR2(yval,yvalpred)
+
+plot(xval,yval,'rs',x,polyvaln(polymodel10,x),'b-');
+legend('Datos validación','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+yvalpred=polyvaln(polymodel10,xval);
+R2(10)=calculateR2(yval,yvalpred)
+
+3.6
+
+plot(xtest,ytest,'r^',x,polyvaln(polymodel3,x),'b-');
+legend('Datos test','Location','northwest','Orientation','vertical');
+xlabel('Nivel de agua(m)');
+ylabel('Caudal de agua(m3/s)');
+
+ytestprend=polyvaln(polymodel3,xtest);
+R2test=calculateR2(ytest,ytestprend)
+
+
+
+
+
+
+
+
+
+
+
+
